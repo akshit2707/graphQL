@@ -156,9 +156,10 @@ const resolvers = {
             }
             const user={
                 id : uuidv4(),
-                name : args.name,
-                email : args.email,
-                age : args.age,
+                // name : args.name,
+                // email : args.email,
+                // age : args.age,
+                ...args
 
             }
             users.push(user)
