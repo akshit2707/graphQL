@@ -2,6 +2,8 @@ import {
     GraphQLServer
 } from 'graphql-yoga'
 
+import { v4 as uuidv4 } from "uuid";
+
 //schema goes here
 
 const users = [{
@@ -72,6 +74,11 @@ const typeDefs = `
         post: Post!
     }
 
+    type Mutation {
+        createUser(name: String! , email: String!,  age: Int): User!
+        createPost(title: String! , body: String!, published: Boolean!,author: ID!): Post!
+    }
+
     type User {
         id: ID!
         name: String!
@@ -139,6 +146,28 @@ const resolvers = {
                 published: false
             }
         }
+    },
+
+    Mutation:{
+        createUser(parent, args, ctx, info){
+            const emailTaken = users.some((user) => user.email === args.email)
+            if(emailTaken){
+                throw new Error('Email already in use')
+            }
+            const user={
+                id : uuidv4(),
+                name : args.name,
+                email : args.email,
+                age : args.age,
+
+            }
+            users.push(user)
+            return user
+        },
+        // createPost(parent, agrs, ctx, info){
+
+        // }
+
     },
     Post: {
         author(parent, args, ctx, info) {
