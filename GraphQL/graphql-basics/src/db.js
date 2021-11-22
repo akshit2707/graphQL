@@ -42,7 +42,7 @@ const comments = [{
     id: '103',
     text: 'Old book',
     author: '1',
-    post: '10'
+    post: '11'
 }, {
     id: '104',
     text: 'Can be improved',
@@ -52,7 +52,7 @@ const comments = [{
     id: '105',
     text: 'Four star',
     author: '1',
-    post: '11'
+    post: '12'
 }]
 
 const db = {
